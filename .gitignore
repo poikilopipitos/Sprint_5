@@ -28,3 +28,11 @@ wheels/
 MANIFEST
 .venv
 venv
+venv/
+.vscode/
+.idea/
+.DS_Store
+pytest_cache/
+*.pyc
+*.pyo
+*.pyd

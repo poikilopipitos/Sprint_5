@@ -1,30 +1,47 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+import locators
 
+def login(driver):
 
-def test_switch_to_buns_section(driver,login):
+    wait = WebDriverWait(driver, 5)
+
+    login_button = wait.until(expected_conditions.visibility_of_element_located(locators.LOGIN_ACCOUNT_BUTTON))
+    login_button.click()
+    wait.until(expected_conditions.visibility_of_element_located(locators.EMAIL_INPUT_TITLE))
+    driver.find_element(*locators.EMAIL_INPUT_AUTORISATION).send_keys("ekaterinaaboimova45777@yandex.ru")
+    driver.find_element(*locators.PASSWORD_INPUT).send_keys("123456")
+    button = wait.until(expected_conditions.visibility_of_element_located(locators.LOGIN_BUTTON))
+    button.click()
+
+def test_switch_to_buns_section(driver):
+
+    login(driver)
 
     wait =  WebDriverWait(driver, 5)
     
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH , "//span[text()='Соусы']"))).click()
-    wait.until(expected_conditions.element_to_be_clickable((By.XPATH , "//span[text()='Булки']"))).click()
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Булки']")))
-
-    assert driver.find_element(By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Булки']").is_displayed()
-
-
-def test_switch_to_fillings_section(driver,login):
+    wait.until(expected_conditions.element_to_be_clickable(locators.SAUCES_TAB)).click()
+    wait.until(expected_conditions.element_to_be_clickable(locators.BUNS_TAB)).click()
     
-    WebDriverWait(driver, 5).until(expected_conditions.element_to_be_clickable((By.XPATH , "//span[text()='Начинки']"))).click()
-    WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located((By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Начинки']")))
+    wait.until(expected_conditions.visibility_of_element_located(locators.ACTIVE_BUNS_TAB))
+    assert driver.find_element(*locators.ACTIVE_BUNS_TAB).is_displayed()
+
+
+def test_switch_to_fillings_section(driver):
+
+    login(driver)
     
-    assert driver.find_element(By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Начинки']").is_displayed()
+    WebDriverWait(driver, 5).until(expected_conditions.element_to_be_clickable(locators.FILLINGS_TAB)).click()
+
+    WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(locators.ACTIVE_FILLINGS_TAB))
+    assert driver.find_element(*locators.ACTIVE_FILLINGS_TAB).is_displayed()
 
 
-def test_switch_to_sauces_section(driver,login):
+def test_switch_to_sauces_section(driver):
 
-    WebDriverWait(driver, 5).until(expected_conditions.element_to_be_clickable((By.XPATH , "//span[text()='Соусы']"))).click()
-    WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located((By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Соусы']")))
-    
-    assert driver.find_element(By.XPATH , "//div[contains(@class, 'tab_tab_type_current')]//span[text()='Соусы']").is_displayed()  
+    login(driver)
+
+    WebDriverWait(driver, 5).until(expected_conditions.element_to_be_clickable(locators.SAUCES_TAB)).click()
+
+    WebDriverWait(driver, 5).until(expected_conditions.visibility_of_element_located(locators.ACTIVE_SAUCES_TAB))
+    assert driver.find_element(*locators.ACTIVE_SAUCES_TAB).is_displayed()  

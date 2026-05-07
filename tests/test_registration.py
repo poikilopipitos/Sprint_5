@@ -1,37 +1,74 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-
+import locators
 
 def test_successful_registration_with_valid_data(driver,name,email,password):
 
     wait =  WebDriverWait(driver, 5)
 
-    driver.find_element(By.XPATH , "//button[text()='Войти в аккаунт']").click()
-    driver.find_element(By.CSS_SELECTOR , "a[href='/register']").click()
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH , "//button[text()='Зарегистрироваться']")))
+    driver.find_element(*locators.LOGIN_ACCOUNT_BUTTON).click()
+    driver.find_element(*locators.REGISTER_LINK).click()
+    
+    wait.until(expected_conditions.visibility_of_element_located(locators.REGISTER_BUTTON))
 
-    driver.find_element(By.XPATH , "//label[text()='Имя']/following-sibling::input").send_keys(name)
-    driver.find_element(By.XPATH , "//label[text()='Email']/following-sibling::input").send_keys(email)
-    driver.find_element(By.XPATH , "//label[text()='Пароль']/following-sibling::input").send_keys(password)
-    driver.find_element(By.XPATH , "//button[text()='Зарегистрироваться']").click()
+    driver.find_element(*locators.NAME_INPUT).send_keys(name)
+    driver.find_element(*locators.EMAIL_INPUT).send_keys(email)
+    driver.find_element(*locators.PASSWORD_INPUT).send_keys(password)
+    driver.find_element(*locators.REGISTER_BUTTON).click()
 
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH ,"//h2[text()='Вход']")))
-    assert driver.find_element(By.XPATH , "//h2[text()='Вход']").is_displayed()
+    wait.until(expected_conditions.visibility_of_element_located(locators.LOGIN_TITLE))
+    assert driver.find_element(*locators.LOGIN_TITLE).is_displayed()
 
 
-def test_registration_fails_with_invalid_password(driver):
+def test_registration_fails_with_short_password(driver,name,email):
 
     wait =  WebDriverWait(driver, 5)
 
-    driver.find_element(By.XPATH , "//button[text()='Войти в аккаунт']").click()
-    driver.find_element(By.CSS_SELECTOR , "a[href='/register']").click()
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH , "//button[text()='Зарегистрироваться']")))
+    driver.find_element(*locators.LOGIN_ACCOUNT_BUTTON).click()
+    driver.find_element(*locators.REGISTER_LINK).click()
+    wait.until(expected_conditions.visibility_of_element_located(locators.REGISTER_BUTTON))
 
-    driver.find_element(By.XPATH , "//label[text()='Имя']/following-sibling::input").send_keys("Екатерина")
-    driver.find_element(By.XPATH , "//label[text()='Email']/following-sibling::input").send_keys("ekaterinaaboimova45777@yandex.ru")
-    driver.find_element(By.XPATH , "//label[text()='Пароль']/following-sibling::input").send_keys("12345")
-    wait.until(expected_conditions.visibility_of_element_located((By.XPATH , "//button[text()='Зарегистрироваться']"))).click()
+    driver.find_element(*locators.NAME_INPUT).send_keys(name)
+    driver.find_element(*locators.EMAIL_INPUT).send_keys(email)
+    driver.find_element(*locators.PASSWORD_INPUT).send_keys("12345")
+    wait.until(expected_conditions.visibility_of_element_located(locators.REGISTER_BUTTON)).click()
 
-    error = driver.find_element(By.XPATH , "//p[text()='Некорректный пароль']")
+    error = driver.find_element(*locators.INVALID_PASSWORD_ERROR)
     assert error.is_displayed()
+
+
+def test_registration_fails_with_empty_name(driver,email,password):
+
+    wait =  WebDriverWait(driver, 5)
+
+    driver.find_element(*locators.LOGIN_ACCOUNT_BUTTON).click()
+    driver.find_element(*locators.REGISTER_LINK).click()
+    wait.until(expected_conditions.visibility_of_element_located(locators.REGISTER_BUTTON))
+
+    driver.find_element(*locators.NAME_INPUT).send_keys('')
+    driver.find_element(*locators.EMAIL_INPUT).send_keys(email)
+    driver.find_element(*locators.PASSWORD_INPUT).send_keys(password)
+    driver.find_element(*locators.REGISTER_BUTTON).click()
+
+    assert not driver.find_elements(*locators.LOGIN_TITLE)
+
+    
+def test_registration_fails_with_invalid_email_format(driver,name,password):
+
+    wait =  WebDriverWait(driver, 5)
+
+    driver.find_element(*locators.LOGIN_ACCOUNT_BUTTON).click()
+    driver.find_element(*locators.REGISTER_LINK).click()
+    wait.until(expected_conditions.visibility_of_element_located(locators.REGISTER_BUTTON))
+
+    driver.find_element(*locators.NAME_INPUT).send_keys(name)
+    driver.find_element(*locators.EMAIL_INPUT).send_keys("qwerty")
+    driver.find_element(*locators.PASSWORD_INPUT).send_keys(password)
+    driver.find_element(*locators.REGISTER_BUTTON).click()
+
+    assert not driver.find_elements(*locators.LOGIN_TITLE)
+
+
+
+
+

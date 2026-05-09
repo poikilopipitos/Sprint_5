@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 LOGIN_ACCOUNT_BUTTON = (By.XPATH , "//button[text()='Войти в аккаунт']")            #Войти в аккаунт
 REGISTER_LINK = (By.CSS_SELECTOR , "a[href='/register']")                           #Сссылка Зарегистрироваться
 REGISTER_BUTTON = (By.XPATH , "//button[text()='Зарегистрироваться']")              #Кнопка Зарегистрироваться
-NAME_INPUT = (By.XPATH, "//label[text()='Имя']/following::input[1]")                #Поле Имя для регистрации
-EMAIL_INPUT = (By.XPATH, "//label[text()='Email']/following::input[1]")             #Поле Email для регистрации
+NAME_INPUT = (By.XPATH, ".//label[text()='Имя']/parent::div//input")                #Поле Имя для регистрации
+EMAIL_INPUT = (By.XPATH, ".//label[text()='Email']/parent::div//input")             #Поле Email для регистрации
 EMAIL_INPUT_TITLE = (By.XPATH , "//label[text()='Email']")                          #Поле Email/плейсхолдер
 PASSWORD_INPUT = (By.XPATH , "//input[@name='Пароль']")                             #Поле Пароль
 LOGIN_TITLE = (By.XPATH , "//h2[text()='Вход']")                                    #Заголовок Вход
@@ -21,7 +21,7 @@ SAUCES_TAB = (By.XPATH , "//span[text()='Соусы']")                         
 ACTIVE_SAUCES_TAB = (By.XPATH , "//div[contains(@class, 'current') and .//span[text()='Соусы']]")                             # Активная вкладка Соусы
 FILLINGS_TAB = (By.XPATH , "//span[text()='Начинки']")                              #Начинки
 ACTIVE_FILLINGS_TAB = (By.XPATH , "//div[contains(@class, 'current') and .//span[text()='Начинки']]")                         # Активная вкладка Начинки
-HEADER_LOGO = (By.CLASS_NAME ,'AppHeader_header__logo__2D0X2')                      #Логотип
+HEADER_LOGO = (By.XPATH , "//*[contains(@class, 'AppHeader_header__logo')]")        #Логотип
 LOGIN_LINK = (By.XPATH , "//a[@href='/login']")                                     #Заголовок Вход/
 EMAIL_INPUT_AUTORIZATION = (By.XPATH , "//input[@name='name']")                     #Поле Email для авторизации
 

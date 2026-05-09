@@ -16,12 +16,12 @@ LOGIN_BUTTON = (By.XPATH , "//button[text()='Войти']")                     
 FORGOT_PASSWORD_LINK = (By.XPATH , "//a[@href='/forgot-password']")                 #Ссылка Восстановить пароль
 CONSTRUCTOR_LINK = (By.XPATH , "//p[text()='Конструктор']")                         #Ссылка Конструктор
 BUNS_TAB = (By.XPATH , "//span[text()='Булки']")                                    #Булки
-ACTIVE_BUNS_TAB = (By.XPATH , "//h2[text()='Булки']")                               # Активная вкладка Булки
+ACTIVE_BUNS_TAB = (By.XPATH , "//div[contains(@class, 'current') and .//span[text()='Булки']]")                               # Активная вкладка Булки
 SAUCES_TAB = (By.XPATH , "//span[text()='Соусы']")                                  #Соусы
-ACTIVE_SAUCES_TAB = (By.XPATH , "//h2[text()='Соусы']")                             # Активная вкладка Соусы
+ACTIVE_SAUCES_TAB = (By.XPATH , "//div[contains(@class, 'current') and .//span[text()='Соусы']]")                             # Активная вкладка Соусы
 FILLINGS_TAB = (By.XPATH , "//span[text()='Начинки']")                              #Начинки
-ACTIVE_FILLINGS_TAB = (By.XPATH , "//h2[text()='Начинки']")                         # Активная вкладка Начинки
+ACTIVE_FILLINGS_TAB = (By.XPATH , "//div[contains(@class, 'current') and .//span[text()='Начинки']]")                         # Активная вкладка Начинки
 HEADER_LOGO = (By.CLASS_NAME ,'AppHeader_header__logo__2D0X2')                      #Логотип
 LOGIN_LINK = (By.XPATH , "//a[@href='/login']")                                     #Заголовок Вход/
-EMAIL_INPUT_AUTORISATION = (By.XPATH , "//input[@name='name']")                     #Поле Email для авторизации
+EMAIL_INPUT_AUTORIZATION = (By.XPATH , "//input[@name='name']")                     #Поле Email для авторизации
 

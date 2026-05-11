@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 LOGIN_ACCOUNT_BUTTON = (By.XPATH , "//button[text()='Войти в аккаунт']")            #Войти в аккаунт
 REGISTER_LINK = (By.CSS_SELECTOR , "a[href='/register']")                           #Сссылка Зарегистрироваться
 REGISTER_BUTTON = (By.XPATH , "//button[text()='Зарегистрироваться']")              #Кнопка Зарегистрироваться
-NAME_INPUT = (By.XPATH, ".//label[text()='Имя']/parent::div//input")                #Поле Имя для регистрации
-EMAIL_INPUT = (By.XPATH, ".//label[text()='Email']/parent::div//input")             #Поле Email для регистрации
+NAME_INPUT = (By.XPATH, "//div[label[text()='Имя']]//input")                        #Поле Имя для регистрации
+EMAIL_INPUT = (By.XPATH, "//div[label[text()='Email']]//input")                     #Поле Email для регистрации
 EMAIL_INPUT_TITLE = (By.XPATH , "//label[text()='Email']")                          #Поле Email/плейсхолдер
 PASSWORD_INPUT = (By.XPATH , "//input[@name='Пароль']")                             #Поле Пароль
 LOGIN_TITLE = (By.XPATH , "//h2[text()='Вход']")                                    #Заголовок Вход
